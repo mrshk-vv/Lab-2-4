@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Windows.Forms;
+using DomainModel;
 using DomainModel.Config;
 using DomainModel.Mock;
 using DomainModel.Models;
@@ -21,7 +23,7 @@ namespace UserControls.Controls
         {
             set
             {
-                roomsView1.roomListBindingSource.DataSource =value.db.Rooms;
+                roomsView1.roomListBindingSource.DataSource = value.db.Rooms;
                 resettlementsView1.resettlementListBindingSource.DataSource = value.db.Resettlements;
                 studentsView1.studentListBindingSource.DataSource = value.db.Students;
 
@@ -30,9 +32,12 @@ namespace UserControls.Controls
             }
         }
 
+
         private void TabsContainer_Load(object sender, System.EventArgs e)
         {
             cbCascadeDeleting.Checked = DbOperationManager.AllowCascadeDeleting;
+
+            
         }
 
         private void cbCascadeDeleting_Click(object sender, System.EventArgs e)
@@ -101,10 +106,10 @@ namespace UserControls.Controls
             var resettlement = new Resettlement
             {
                 GradeBookNumber = randomStudent?.GradeBookNumber,
-                CheckInDate = DateTime.Now,
-                ChectOutDate = DateTime.Now.AddYears(1),
-                HostelNumber = randomRoom != null ? randomRoom.HostelNumber : Hostel.First,
-                RoomId = randomRoom != null ? randomRoom.Id : 1,
+                CheckInDate = GetRandomDate(),
+                ChectOutDate = GetRandomDate(),
+                HostelNumber = randomRoom?.HostelNumber ?? Hostel.First,
+                RoomId = randomRoom?.Id ?? 1,
             };
 
             e.NewObject = resettlement;
@@ -115,8 +120,8 @@ namespace UserControls.Controls
             if (roomsView1.roomListBindingSource.Current == null)
                 return;
 
-            var id = (roomsView1.roomListBindingSource.Current as Room).Id;
-            roomsView1.bnRooms.DeleteItem.Enabled = Storage.Instance.AllowRemoveRoom(id);
+            var id = (roomsView1.roomListBindingSource.Current as Room)?.Id;
+            roomsView1.bnRooms.DeleteItem.Enabled = Storage.Instance.AllowRemoveRoom(id.Value);
         }
 
         private void CheckStudentRelations(object sender, EventArgs e)
@@ -124,8 +129,27 @@ namespace UserControls.Controls
             if (studentsView1.studentListBindingSource.Current == null) 
                 return;
 
-            var gradeBook = (studentsView1.studentListBindingSource.Current as Student).GradeBookNumber;
+            var gradeBook = (studentsView1.studentListBindingSource.Current as Student)?.GradeBookNumber;
             studentsView1.bnStudents.DeleteItem.Enabled = Storage.Instance.AllowRemoveStudent(gradeBook);
+        }
+    }
+}
+
+namespace UserControls.Controls
+{
+    public partial class TabsContainer
+    {
+        public void ClearData()
+        {
+            studentsView1.ClearData();
+            roomsView1.ClearData();
+            resettlementsView1.ClearData();
+        }
+        public void UpdateData()
+        {
+            studentsView1.UpdateBinding();
+            roomsView1.UpdateBinding();
+            resettlementsView1.UpdateBinding();
         }
     }
 }

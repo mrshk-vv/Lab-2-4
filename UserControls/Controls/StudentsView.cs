@@ -34,3 +34,19 @@ namespace UserControls.Controls
         }
     }
 }
+
+namespace UserControls.Controls
+{
+    public partial class studentsView
+    {
+        internal void UpdateBinding()
+        {
+            studentListBindingSource.ResetBindings(false);
+        }
+
+        internal void ClearData()
+        {
+            studentListBindingSource.Clear();
+        }
+    }
+}

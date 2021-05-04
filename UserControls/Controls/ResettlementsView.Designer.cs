@@ -32,14 +32,8 @@ namespace UserControls.Controls
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(resettlementsView));
             this.dgvResettlements = new Zuby.ADGV.AdvancedDataGridView();
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.gradeBookNumberResettlementComboBox = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.studentListBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.hostelNumberResettlementComboBox = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.roomResettlementComboBox = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.roomListBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.checkInDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chectOutDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.resettlementListBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
@@ -53,6 +47,12 @@ namespace UserControls.Controls
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gradeBookNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.hostelNumberResettlementComboBox = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.roomIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.checkInDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chectOutDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvResettlements)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.studentListBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.roomListBindingSource)).BeginInit();
@@ -70,9 +70,9 @@ namespace UserControls.Controls
             this.dgvResettlements.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvResettlements.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idDataGridViewTextBoxColumn,
-            this.gradeBookNumberResettlementComboBox,
+            this.gradeBookNumberDataGridViewTextBoxColumn,
             this.hostelNumberResettlementComboBox,
-            this.roomResettlementComboBox,
+            this.roomIdDataGridViewTextBoxColumn,
             this.checkInDateDataGridViewTextBoxColumn,
             this.chectOutDateDataGridViewTextBoxColumn});
             this.dgvResettlements.DataSource = this.resettlementListBindingSource;
@@ -89,80 +89,20 @@ namespace UserControls.Controls
             this.dgvResettlements.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvResettlements_DataError);
             this.dgvResettlements.DefaultValuesNeeded += new System.Windows.Forms.DataGridViewRowEventHandler(this.dgvResettlements_DefaultValuesNeeded);
             // 
-            // idDataGridViewTextBoxColumn
-            // 
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.idDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            this.idDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.idDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // gradeBookNumberResettlementComboBox
-            // 
-            this.gradeBookNumberResettlementComboBox.DataPropertyName = "GradeBookNumber";
-            this.gradeBookNumberResettlementComboBox.DataSource = this.studentListBindingSource;
-            this.gradeBookNumberResettlementComboBox.DisplayMember = "FullName";
-            this.gradeBookNumberResettlementComboBox.HeaderText = "Студент";
-            this.gradeBookNumberResettlementComboBox.MinimumWidth = 22;
-            this.gradeBookNumberResettlementComboBox.Name = "gradeBookNumberResettlementComboBox";
-            this.gradeBookNumberResettlementComboBox.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.gradeBookNumberResettlementComboBox.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.gradeBookNumberResettlementComboBox.ValueMember = "GradeBookNumber";
-            this.gradeBookNumberResettlementComboBox.Width = 125;
-            // 
             // studentListBindingSource
             // 
-            this.studentListBindingSource.DataSource = typeof(DomainModel.Storage.DomainModel.StudentList);
-            // 
-            // hostelNumberResettlementComboBox
-            // 
-            this.hostelNumberResettlementComboBox.DataPropertyName = "HostelNumber";
-            this.hostelNumberResettlementComboBox.HeaderText = "Номер общежития";
-            this.hostelNumberResettlementComboBox.MinimumWidth = 22;
-            this.hostelNumberResettlementComboBox.Name = "hostelNumberResettlementComboBox";
-            this.hostelNumberResettlementComboBox.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.hostelNumberResettlementComboBox.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.hostelNumberResettlementComboBox.Width = 125;
-            // 
-            // roomResettlementComboBox
-            // 
-            this.roomResettlementComboBox.DataPropertyName = "RoomId";
-            this.roomResettlementComboBox.DataSource = this.roomListBindingSource;
-            this.roomResettlementComboBox.DisplayMember = "RoomNumber";
-            this.roomResettlementComboBox.HeaderText = "Номер комнаты";
-            this.roomResettlementComboBox.MinimumWidth = 22;
-            this.roomResettlementComboBox.Name = "roomResettlementComboBox";
-            this.roomResettlementComboBox.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.roomResettlementComboBox.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.roomResettlementComboBox.ValueMember = "Id";
-            this.roomResettlementComboBox.Width = 125;
+            this.studentListBindingSource.DataMember = "Students";
+            this.studentListBindingSource.DataSource = typeof(DomainModel.Storage.Storage.DataBase);
             // 
             // roomListBindingSource
             // 
-            this.roomListBindingSource.DataSource = typeof(DomainModel.Storage.DomainModel.RoomList);
-            // 
-            // checkInDateDataGridViewTextBoxColumn
-            // 
-            this.checkInDateDataGridViewTextBoxColumn.DataPropertyName = "CheckInDate";
-            this.checkInDateDataGridViewTextBoxColumn.HeaderText = "Дата вселения";
-            this.checkInDateDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.checkInDateDataGridViewTextBoxColumn.Name = "checkInDateDataGridViewTextBoxColumn";
-            this.checkInDateDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.checkInDateDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // chectOutDateDataGridViewTextBoxColumn
-            // 
-            this.chectOutDateDataGridViewTextBoxColumn.DataPropertyName = "ChectOutDate";
-            this.chectOutDateDataGridViewTextBoxColumn.HeaderText = "Дата выселения";
-            this.chectOutDateDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.chectOutDateDataGridViewTextBoxColumn.Name = "chectOutDateDataGridViewTextBoxColumn";
-            this.chectOutDateDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.chectOutDateDataGridViewTextBoxColumn.Width = 125;
+            this.roomListBindingSource.DataMember = "Rooms";
+            this.roomListBindingSource.DataSource = typeof(DomainModel.Storage.Storage.DataBase);
             // 
             // resettlementListBindingSource
             // 
-            this.resettlementListBindingSource.DataSource = typeof(DomainModel.Storage.DomainModel.ResettlementList);
+            this.resettlementListBindingSource.DataMember = "Resettlements";
+            this.resettlementListBindingSource.DataSource = typeof(DomainModel.Storage.Storage.DataBase);
             // 
             // bindingNavigator1
             // 
@@ -190,7 +130,7 @@ namespace UserControls.Controls
             this.bindingNavigator1.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.bindingNavigator1.Name = "bindingNavigator1";
             this.bindingNavigator1.PositionItem = this.bindingNavigatorPositionItem;
-            this.bindingNavigator1.Size = new System.Drawing.Size(720, 27);
+            this.bindingNavigator1.Size = new System.Drawing.Size(720, 31);
             this.bindingNavigator1.TabIndex = 1;
             this.bindingNavigator1.Text = "bnResettlements";
             // 
@@ -200,14 +140,14 @@ namespace UserControls.Controls
             this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
             this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
             this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(29, 24);
+            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(29, 28);
             this.bindingNavigatorAddNewItem.Text = "Добавить";
             // 
             // bindingNavigatorCountItem
             // 
             this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
-            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(45, 24);
-            this.bindingNavigatorCountItem.Text = "of {0}";
+            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(55, 24);
+            this.bindingNavigatorCountItem.Text = "для {0}";
             this.bindingNavigatorCountItem.ToolTipText = "Общее число элементов";
             // 
             // bindingNavigatorDeleteItem
@@ -279,6 +219,69 @@ namespace UserControls.Controls
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 27);
             // 
+            // idDataGridViewTextBoxColumn
+            // 
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.idDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.idDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // gradeBookNumberDataGridViewTextBoxColumn
+            // 
+            this.gradeBookNumberDataGridViewTextBoxColumn.DataPropertyName = "GradeBookNumber";
+            this.gradeBookNumberDataGridViewTextBoxColumn.DataSource = this.studentListBindingSource;
+            this.gradeBookNumberDataGridViewTextBoxColumn.DisplayMember = "FullName";
+            this.gradeBookNumberDataGridViewTextBoxColumn.HeaderText = "Студент";
+            this.gradeBookNumberDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.gradeBookNumberDataGridViewTextBoxColumn.Name = "gradeBookNumberDataGridViewTextBoxColumn";
+            this.gradeBookNumberDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.gradeBookNumberDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.gradeBookNumberDataGridViewTextBoxColumn.ValueMember = "GradeBookNumber";
+            this.gradeBookNumberDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // hostelNumberResettlementComboBox
+            // 
+            this.hostelNumberResettlementComboBox.DataPropertyName = "HostelNumber";
+            this.hostelNumberResettlementComboBox.HeaderText = "Номер общежития";
+            this.hostelNumberResettlementComboBox.MinimumWidth = 22;
+            this.hostelNumberResettlementComboBox.Name = "hostelNumberResettlementComboBox";
+            this.hostelNumberResettlementComboBox.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.hostelNumberResettlementComboBox.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.hostelNumberResettlementComboBox.Width = 125;
+            // 
+            // roomIdDataGridViewTextBoxColumn
+            // 
+            this.roomIdDataGridViewTextBoxColumn.DataPropertyName = "RoomId";
+            this.roomIdDataGridViewTextBoxColumn.DataSource = this.roomListBindingSource;
+            this.roomIdDataGridViewTextBoxColumn.DisplayMember = "RoomNumber";
+            this.roomIdDataGridViewTextBoxColumn.HeaderText = "Номер комнаты";
+            this.roomIdDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.roomIdDataGridViewTextBoxColumn.Name = "roomIdDataGridViewTextBoxColumn";
+            this.roomIdDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.roomIdDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.roomIdDataGridViewTextBoxColumn.ValueMember = "Id";
+            this.roomIdDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // checkInDateDataGridViewTextBoxColumn
+            // 
+            this.checkInDateDataGridViewTextBoxColumn.DataPropertyName = "CheckInDate";
+            this.checkInDateDataGridViewTextBoxColumn.HeaderText = "Дата вселения";
+            this.checkInDateDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.checkInDateDataGridViewTextBoxColumn.Name = "checkInDateDataGridViewTextBoxColumn";
+            this.checkInDateDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.checkInDateDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // chectOutDateDataGridViewTextBoxColumn
+            // 
+            this.chectOutDateDataGridViewTextBoxColumn.DataPropertyName = "ChectOutDate";
+            this.chectOutDateDataGridViewTextBoxColumn.HeaderText = "Дата выселения";
+            this.chectOutDateDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.chectOutDateDataGridViewTextBoxColumn.Name = "chectOutDateDataGridViewTextBoxColumn";
+            this.chectOutDateDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.chectOutDateDataGridViewTextBoxColumn.Width = 125;
+            // 
             // resettlementsView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -301,8 +304,6 @@ namespace UserControls.Controls
         }
 
         #endregion
-
-        private Zuby.ADGV.AdvancedDataGridView dgvResettlements;
         private System.Windows.Forms.BindingNavigator bindingNavigator1;
         private System.Windows.Forms.ToolStripButton bindingNavigatorAddNewItem;
         private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;
@@ -317,12 +318,13 @@ namespace UserControls.Controls
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
         public System.Windows.Forms.BindingSource resettlementListBindingSource;
         internal System.Windows.Forms.BindingSource studentListBindingSource;
+        internal System.Windows.Forms.BindingSource roomListBindingSource;
+        internal Zuby.ADGV.AdvancedDataGridView dgvResettlements;
         private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewComboBoxColumn gradeBookNumberResettlementComboBox;
+        private System.Windows.Forms.DataGridViewComboBoxColumn gradeBookNumberDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewComboBoxColumn hostelNumberResettlementComboBox;
-        private System.Windows.Forms.DataGridViewComboBoxColumn roomResettlementComboBox;
+        private System.Windows.Forms.DataGridViewComboBoxColumn roomIdDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn checkInDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn chectOutDateDataGridViewTextBoxColumn;
-        internal System.Windows.Forms.BindingSource roomListBindingSource;
     }
 }

@@ -2,6 +2,8 @@
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.Serialization;
+using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 namespace DomainModel.Models
 {
@@ -12,6 +14,8 @@ namespace DomainModel.Models
         [DisplayName("Номер зачётной книжки")]
         public string GradeBookNumber { get; set; }
 
+        [JsonIgnore]
+        [XmlIgnore]
         public virtual Student Student
         {
             get => db.Students[db.Students.ToList().FindIndex(x => x.GradeBookNumber == GradeBookNumber)];
@@ -24,6 +28,8 @@ namespace DomainModel.Models
         [DisplayName("Номер комнаты")]
         public int RoomId { get; set; }
 
+        [JsonIgnore]
+        [XmlIgnore]
         public virtual Room Room
         {
             get => db.Rooms[db.Rooms.ToList().FindIndex(x => x.Id == RoomId)];
@@ -56,6 +62,7 @@ namespace DomainModel.Models
             Id = NewId;
         }
 
+        [JsonIgnore]
         private int NewId
         {
             get

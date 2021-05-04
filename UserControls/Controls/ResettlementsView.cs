@@ -20,23 +20,8 @@ namespace UserControls.Controls
             InitializeComponent();
             dgvResettlements.AllowUserToAddRows = false;
             dgvResettlements.AllowUserToDeleteRows = false;
-            ;
-            hostelNumberResettlementComboBox.BindToEnum<Hostel>();
-        }
 
-        private void ressettlementDGV_DefaultValuesNeeded(object sender, DataGridViewRowEventArgs e)
-        {
-            try
-            {
-                var currentDate = DateTime.Now;
-                e.Row.Cells["CheckInDate"].Value = currentDate.AddYears(1).ToString();
-                e.Row.Cells["CheckOutDate"].Value = currentDate.ToString();
-            }
-            catch (Exception ex)
-            {
-                ex.GetType();
-                MessageBox.Show(ex.Message);
-            }
+            hostelNumberResettlementComboBox.BindToEnum<Hostel>();
         }
 
         private void dgvResettlements_SortStringChanged(object sender, Zuby.ADGV.AdvancedDataGridView.SortEventArgs e)
@@ -59,21 +44,7 @@ namespace UserControls.Controls
 
         private void dgvResettlements_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            //if (e.RowIndex >= 0)
-            //{
-            //    DataGridViewComboBoxCell cb = (DataGridViewComboBoxCell)dgvResettlements.Rows?[e.RowIndex].Cells?[2];
-            //    if (cb.Value != null)
-            //    {
-            //        if (cb.Value is Hostel)
-            //        {
-            //            roomsSetBindingSource.Clear();
-            //            Storage.Instance.db.Rooms.Where(x => x.HostelNumber == (Hostel)cb.Value)
-            //                                     .Select(r => new RoomItem { Id = r.Id, RoomNumber = r.RoomNumber })
-            //                                     .ToList()
-            //                                     .ForEach(x => roomsSetBindingSource.Add(x));
-            //        }
-            //    }
-            //}
+           
         }
 
         private void dgvResettlements_DataError(object sender, DataGridViewDataErrorEventArgs e){ }
@@ -92,6 +63,26 @@ namespace UserControls.Controls
                 ex.GetType();
                 MessageBox.Show(ex.Message);
             }
+        }
+    }
+}
+
+namespace UserControls.Controls
+{
+    public partial class resettlementsView
+    {
+        internal void UpdateBinding()
+        {
+            resettlementListBindingSource.ResetBindings(false);
+            studentListBindingSource.ResetBindings(false);
+            roomListBindingSource.ResetBindings(false);
+        }
+
+        internal void ClearData()
+        {
+            resettlementListBindingSource.Clear();
+            studentListBindingSource.Clear();
+            roomListBindingSource.Clear();
         }
     }
 }

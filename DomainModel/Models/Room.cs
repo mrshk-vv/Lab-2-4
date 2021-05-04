@@ -4,9 +4,12 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 namespace DomainModel.Models
 {
+    [Serializable]
     public class Room : Base
     {
         private static int counter = 1;
@@ -22,6 +25,8 @@ namespace DomainModel.Models
         [DisplayName("Вместимость")]
         public Capacity Capacity { get; set; }
 
+        [JsonIgnore]
+        [XmlIgnore]
         public virtual IReadOnlyCollection<Resettlement> Resettlements
         {
             get => db.Resettlements.ToList().FindAll(x => x.RoomId == Id);
@@ -32,6 +37,7 @@ namespace DomainModel.Models
             Id = NewId;
         }
 
+        [JsonIgnore]
         private int NewId
         {
             get

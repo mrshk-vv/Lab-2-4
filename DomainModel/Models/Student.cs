@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 namespace DomainModel.Models
 {
@@ -25,6 +27,9 @@ namespace DomainModel.Models
         [DisplayName("Отчество")]
         public string Patronymic { get; set; }
 
+
+        [XmlIgnore]
+        [JsonIgnore]
         public virtual IReadOnlyCollection<Resettlement> Resettlements
         {
             get => db.Resettlements.ToList().FindAll(x => x.GradeBookNumber == GradeBookNumber);
@@ -35,6 +40,8 @@ namespace DomainModel.Models
             Id = NewId;
         }
 
+        [XmlIgnore]
+        [JsonIgnore]
         private int NewId
         {
             get
@@ -46,6 +53,7 @@ namespace DomainModel.Models
             }
         }
 
+        [JsonIgnore]
         public string FullName
         {
             get

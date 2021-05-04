@@ -29,7 +29,7 @@ namespace DomainModel
             
         }
 
-        private static DateTime GetRandomDate()
+        public static DateTime GetRandomDate()
         {
             DateTime start = new DateTime(1995, 1, 1);
             int range = (DateTime.Today - start).Days;

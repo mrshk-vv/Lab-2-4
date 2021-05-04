@@ -62,3 +62,19 @@ namespace UserControls.Controls
     }
 }
 
+namespace UserControls.Controls
+{
+    public partial class roomsView
+    {
+        internal void UpdateBinding()
+        {
+            roomListBindingSource.ResetBindings(false);
+        }
+
+        internal void ClearData()
+        {
+            roomListBindingSource.Clear();
+        }
+    }
+}
+

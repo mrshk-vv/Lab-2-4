@@ -88,11 +88,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
-    <None Include="Properties\DataSources\DomainModel.Models.RoomsSet.datasource" />
-    <None Include="Properties\DataSources\DomainModel.Storage.DomainModel.ResettlementList.datasource" />
-    <None Include="Properties\DataSources\DomainModel.Storage.DomainModel.RoomList.datasource" />
-    <None Include="Properties\DataSources\DomainModel.Storage.DomainModel.StudentList.datasource" />
+    <None Include="Properties\DataSources\DomainModel.Storage.Storage+DataBase.datasource" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DomainModel\DomainModel.csproj">

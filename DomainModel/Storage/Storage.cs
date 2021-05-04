@@ -162,11 +162,11 @@ namespace DomainModel.Storage
         private void SaveJson(string filePath)
         {
             using (FileStream fs = new FileStream($"{filePath}.json", FileMode.Create))
+            using (StreamWriter sw = new StreamWriter(fs))
             {
-                var json = JsonConvert.SerializeObject(db, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
-                fs.Write(Encoding.ASCII.GetBytes(json), 0, json.Length);
-
-                fs.Close();
+                var json = JsonConvert.SerializeObject(db, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore, Formatting = Formatting.Indented});
+                sw.WriteLine(json);
+                sw.Close();
             }
         }
 

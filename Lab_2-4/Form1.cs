@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DomainModel.Storage;
+using System;
 using System.Windows.Forms;
-using DomainModel.Storage;
 
 namespace Lab_2_4
 {
@@ -44,6 +37,8 @@ namespace Lab_2_4
                 Storage.Instance.Save(saveFileWindow.FileName, format);
         }
 
+        #region Open
+
         private void openJson_Click(object sender, EventArgs e)
         {
             openFileWindow.Filter = "JSON (*.json)|*.json|All files (*.*)|*.*";
@@ -63,6 +58,11 @@ namespace Lab_2_4
             OnOpen();
         }
 
+        #endregion
+
+
+        #region Save
+
         private void saveJson_Click(object sender, EventArgs e)
         {
             OnSave(Storage.Format.json);
@@ -77,5 +77,17 @@ namespace Lab_2_4
         {
             OnSave(Storage.Format.bin);
         }
+
+        private void saveWord_Click(object sender, EventArgs e)
+        {
+            OnSave(Storage.Format.docx);
+        }
+
+        private void saveExcel_Click(object sender, EventArgs e)
+        {
+            OnSave(Storage.Format.xlsx);
+        }
+
+        #endregion
     }
 }

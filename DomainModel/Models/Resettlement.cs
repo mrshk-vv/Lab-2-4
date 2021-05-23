@@ -3,11 +3,13 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
+using BaseExporter.Attributes;
 using Newtonsoft.Json;
 
 namespace DomainModel.Models
 {
     [Serializable]
+    [TableName("Переселения")]
     public class Resettlement : Base
     {
         private static int counter = 1;

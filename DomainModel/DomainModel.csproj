@@ -34,6 +34,10 @@
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.5.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Word.15.0.4797.1003\lib\net20\Microsoft.Office.Interop.Word.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -90,5 +94,20 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BaseExporter\BaseExporter.csproj">
+      <Project>{083e7dc2-0436-42ab-bfa1-9326deb58af3}</Project>
+      <Name>BaseExporter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ExcelExporter\ExcelExporter.csproj">
+      <Project>{0B11704B-AC18-47B3-BBB5-34BD6FA27156}</Project>
+      <Name>ExcelExporter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WordExport\WordExporter.csproj">
+      <Project>{A67E0CE1-A033-4BB2-8008-618654B3B13A}</Project>
+      <Name>WordExporter</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

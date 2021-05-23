@@ -38,9 +38,11 @@ namespace Lab_2_4
             this.saveJson = new System.Windows.Forms.ToolStripMenuItem();
             this.saveXml = new System.Windows.Forms.ToolStripMenuItem();
             this.saveBin = new System.Windows.Forms.ToolStripMenuItem();
-            this.tabsContainer = new UserControls.Controls.TabsContainer();
+            this.saveWord = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveExcel = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileWindow = new System.Windows.Forms.OpenFileDialog();
             this.saveFileWindow = new System.Windows.Forms.SaveFileDialog();
+            this.tabsContainer = new UserControls.Controls.TabsContainer();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -92,7 +94,9 @@ namespace Lab_2_4
             this.сохранитьToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.saveJson,
             this.saveXml,
-            this.saveBin});
+            this.saveBin,
+            this.saveWord,
+            this.saveExcel});
             this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
             this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(97, 24);
             this.сохранитьToolStripMenuItem.Text = "Сохранить";
@@ -118,6 +122,24 @@ namespace Lab_2_4
             this.saveBin.Text = "BIN";
             this.saveBin.Click += new System.EventHandler(this.saveBin_Click);
             // 
+            // saveWord
+            // 
+            this.saveWord.Name = "saveWord";
+            this.saveWord.Size = new System.Drawing.Size(224, 26);
+            this.saveWord.Text = "WORD";
+            this.saveWord.Click += new System.EventHandler(this.saveWord_Click);
+            // 
+            // saveExcel
+            // 
+            this.saveExcel.Name = "saveExcel";
+            this.saveExcel.Size = new System.Drawing.Size(224, 26);
+            this.saveExcel.Text = "EXCEL";
+            this.saveExcel.Click += new System.EventHandler(this.saveExcel_Click);
+            // 
+            // openFileWindow
+            // 
+            this.openFileWindow.FileName = "openFileDialog1";
+            // 
             // tabsContainer
             // 
             this.tabsContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -128,10 +150,6 @@ namespace Lab_2_4
             this.tabsContainer.Name = "tabsContainer";
             this.tabsContainer.Size = new System.Drawing.Size(824, 512);
             this.tabsContainer.TabIndex = 0;
-            // 
-            // openFileWindow
-            // 
-            this.openFileWindow.FileName = "openFileDialog1";
             // 
             // Form1
             // 
@@ -162,6 +180,8 @@ namespace Lab_2_4
         private System.Windows.Forms.ToolStripMenuItem saveBin;
         private System.Windows.Forms.OpenFileDialog openFileWindow;
         private System.Windows.Forms.SaveFileDialog saveFileWindow;
+        private System.Windows.Forms.ToolStripMenuItem saveWord;
+        private System.Windows.Forms.ToolStripMenuItem saveExcel;
     }
 }
 

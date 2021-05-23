@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -9,6 +10,7 @@ using DomainModel.Config;
 using DomainModel.Models;
 using DomainModel.Storage.DomainModel;
 using Newtonsoft.Json;
+using WordExport.Impl;
 
 namespace DomainModel.Storage
 {
@@ -97,7 +99,15 @@ namespace DomainModel.Storage
 
     public partial class Storage
     {
-        public enum Format { bin, xml, json }
+        public enum Format
+        {
+            bin = 1, 
+            xml, 
+            json,  
+            docx,
+            doc,  
+            xlsx 
+        }
 
         public bool Save(string path, Format format)
         {
@@ -113,6 +123,13 @@ namespace DomainModel.Storage
                         break;
                     case Format.json:
                         SaveJson(path);
+                        break;
+                    case Format.doc:
+                    case Format.docx:
+                        SaveWord(path);
+                        break;
+                    case Format.xlsx:
+                        SaveExcel(path);
                         break;
                     default:
                         throw new Exception($"{format} doesnt exist in available formats ");
@@ -161,10 +178,11 @@ namespace DomainModel.Storage
 
         private void SaveJson(string filePath)
         {
+
             using (FileStream fs = new FileStream($"{filePath}.json", FileMode.Create))
             using (StreamWriter sw = new StreamWriter(fs))
             {
-                var json = JsonConvert.SerializeObject(db, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore, Formatting = Formatting.Indented});
+                var json = JsonConvert.SerializeObject(db, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore, Formatting = Formatting.Indented });
                 sw.WriteLine(json);
                 sw.Close();
             }
@@ -188,6 +206,28 @@ namespace DomainModel.Storage
                 xml.Serialize(fs, db);
                 fs.Close();
             }
+        }
+
+        private void SaveWord(string filePath)
+        {
+            var wordExporter = new WordExporter(filePath);
+
+            wordExporter.CreateExportDoc()
+                .AddTable(Instance.db.Students.ToList())
+                .AddTable(Instance.db.Rooms.ToList())
+                .AddTable(Instance.db.Resettlements.ToList())
+                .SaveExportDoc();
+        }
+
+        private void SaveExcel(string filePath)
+        {
+            var excelExporter = new ExcelExporter.Impl.ExcelExporter(filePath, 3);
+
+            excelExporter.CreateExportDoc()
+                .CreateSheet(Instance.db.Students.ToList())
+                .CreateSheet(Instance.db.Rooms.ToList())
+                .CreateSheet(Instance.db.Resettlements.ToList())
+                .SaveExportDoc();
         }
 
         private void LoadJson(string path)

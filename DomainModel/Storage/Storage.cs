@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -8,7 +9,9 @@ using System.Xml.Serialization;
 using DomainModel.Config;
 using DomainModel.Models;
 using DomainModel.Storage.DomainModel;
+using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using WordExport.Impl;
 
 namespace DomainModel.Storage
 {
@@ -97,7 +100,15 @@ namespace DomainModel.Storage
 
     public partial class Storage
     {
-        public enum Format { bin, xml, json }
+        public enum Format
+        {
+            bin = 1,
+            xml,
+            json,
+            docx,
+            doc,
+            xlsx
+        }
 
         public bool Save(string path, Format format)
         {
@@ -114,6 +125,13 @@ namespace DomainModel.Storage
                     case Format.json:
                         SaveJson(path);
                         break;
+                    case Format.doc:
+                    case Format.docx:
+                        SaveWord(path);
+                        break;
+                    case Format.xlsx:
+                        SaveExcel(path);
+                        break;
                     default:
                         throw new Exception($"{format} doesnt exist in available formats ");
                 }
@@ -127,6 +145,125 @@ namespace DomainModel.Storage
             }
 
         }
+
+        public MemoryStream Save(Format format)
+        {
+            try
+            {
+                switch (format)
+                {
+                    case Format.bin:
+                        return SaveBin();
+                    case Format.xml:
+                        return SaveXml();
+                    case Format.json:
+                        return SaveJson();
+                    default:
+                        throw new Exception($"{format} doesnt exist in available formats ");
+                }
+
+            }
+            catch (Exception e)
+            {
+                //MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+
+        }
+
+        public void Load(IFormFile file, Format format)
+        {
+            try
+            {
+                switch (format)
+                {
+                    case Format.bin:
+                        LoadBin(file);
+                        break;
+                    case Format.xml:
+                        LoadXml(file);
+                        break;
+                    case Format.json:
+                        LoadJson(file);
+                        break;
+                    default:
+                        throw new Exception($"{format} doesnt exist in available formats ");
+                }
+
+            }
+            catch (Exception e)
+            {
+                //MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                
+            }
+        }
+
+
+        #region ForWebApp
+        private MemoryStream SaveJson()
+        {
+            var json = JsonConvert.SerializeObject(Instance.db, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore, Formatting = Formatting.Indented });
+            var bytesData = Encoding.UTF8.GetBytes(json);
+            return new MemoryStream(bytesData);
+        }
+
+        private MemoryStream SaveBin()
+        {
+            var fmt = new BinaryFormatter();
+            MemoryStream ms = new MemoryStream();
+            fmt.Serialize(ms, db);
+
+            return ms;
+        }
+
+        private MemoryStream SaveXml()
+        {
+            XmlSerializer xml = new XmlSerializer(db.GetType());
+            MemoryStream ms = new MemoryStream();
+            xml.Serialize(ms, db);
+
+            return ms;
+        }
+
+        private void LoadJson(IFormFile file)
+        {
+            var data = file.OpenReadStream();
+            using (StreamReader st = new StreamReader(data))
+            {
+                var jsonContent = st.ReadToEnd();
+                var serializerDb = JsonConvert.DeserializeObject<DataBase>(jsonContent);
+                SetDbData(serializerDb);
+                st.Close();
+                data.Close();
+            }
+        }
+
+        private void LoadBin(IFormFile file)
+        {
+            BinaryFormatter fmt = new BinaryFormatter();
+            using (var stream = file.OpenReadStream())
+            {
+                var serializedDb = fmt.Deserialize(stream) as DataBase;
+                SetDbData(serializedDb);
+                stream.Close();
+            }
+        }
+
+        private void LoadXml(IFormFile file)
+        {
+            XmlSerializer xml = new XmlSerializer(db.GetType());
+            using (var stream = file.OpenReadStream())
+            {
+                var serializedDb = xml.Deserialize(stream) as DataBase;
+                SetDbData(serializedDb);
+                stream.Close();
+            }
+        }
+
+        #endregion
+
+
+        #region ForDesktopApp
 
         public bool Load(string filePath)
         {
@@ -156,19 +293,21 @@ namespace DomainModel.Storage
                 MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            
-        }
 
+        }
         private void SaveJson(string filePath)
         {
+
             using (FileStream fs = new FileStream($"{filePath}.json", FileMode.Create))
             using (StreamWriter sw = new StreamWriter(fs))
             {
-                var json = JsonConvert.SerializeObject(db, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore, Formatting = Formatting.Indented});
+                var json = JsonConvert.SerializeObject(db, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore, Formatting = Formatting.Indented });
                 sw.WriteLine(json);
                 sw.Close();
             }
         }
+
+
 
         private void SaveBin(string filePath)
         {
@@ -188,6 +327,28 @@ namespace DomainModel.Storage
                 xml.Serialize(fs, db);
                 fs.Close();
             }
+        }
+
+        private void SaveWord(string filePath)
+        {
+            var wordExporter = new WordExporter(filePath);
+
+            wordExporter.CreateExportDoc()
+                .AddTable(Instance.db.Students.ToList())
+                .AddTable(Instance.db.Rooms.ToList())
+                .AddTable(Instance.db.Resettlements.ToList())
+                .SaveExportDoc();
+        }
+
+        private void SaveExcel(string filePath)
+        {
+            var excelExporter = new ExcelExporter.Impl.ExcelExporter(filePath, 3);
+
+            excelExporter.CreateExportDoc()
+                .CreateSheet(Instance.db.Students.ToList())
+                .CreateSheet(Instance.db.Rooms.ToList())
+                .CreateSheet(Instance.db.Resettlements.ToList())
+                .SaveExportDoc();
         }
 
         private void LoadJson(string path)
@@ -225,6 +386,8 @@ namespace DomainModel.Storage
                 fs.Close();
             }
         }
+        #endregion
+
 
         private void SetDbData(DataBase db)
         {

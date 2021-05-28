@@ -1,0 +1,31 @@
+{
+  "Resettlements": [
+    {
+      "GradeBookNumber": "189345d3-6f4e-4e87-9793-80f2f50273c7",
+      "HostelNumber": 2,
+      "RoomId": 1,
+      "CheckInDate": "2021-05-27T00:00:00",
+      "ChectOutDate": "2022-05-27T00:00:00",
+      "Id": 1
+    }
+  ],
+  "Rooms": [
+    {
+      "HostelNumber": 7,
+      "RoomNumber": 422,
+      "FloorNumber": 2,
+      "Capacity": 2,
+      "Id": 1
+    }
+  ],
+  "Students": [
+    {
+      "GradeBookNumber": "189345d3-6f4e-4e87-9793-80f2f50273c7",
+      "GroupNumber": "631?",
+      "Surname": "Murashko",
+      "Name": "Volodymyr",
+      "Patronymic": "????????????",
+      "Id": 1
+    }
+  ]
+}

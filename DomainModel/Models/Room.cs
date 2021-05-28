@@ -5,11 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using BaseExporter.Attributes;
 using Newtonsoft.Json;
 
 namespace DomainModel.Models
 {
     [Serializable]
+    [TableName("Комнаты")]
     public class Room : Base
     {
         private static int counter = 1;

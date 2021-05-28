@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Xml.Serialization;
+using BaseExporter.Attributes;
 using Newtonsoft.Json;
 
 namespace DomainModel.Models
 {
     [Serializable]
+    [TableName("Студенты")]
     public class Student : Base
     {
         private static int counter = 1;
@@ -38,6 +40,7 @@ namespace DomainModel.Models
         public Student()
         {
             Id = NewId;
+            GradeBookNumber = Guid.NewGuid().ToString();
         }
 
         [XmlIgnore]

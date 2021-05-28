@@ -40,6 +40,7 @@ namespace DomainModel.Models
         public Student()
         {
             Id = NewId;
+            GradeBookNumber = Guid.NewGuid().ToString();
         }
 
         [XmlIgnore]

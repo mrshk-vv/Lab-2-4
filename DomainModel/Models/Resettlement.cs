@@ -62,6 +62,8 @@ namespace DomainModel.Models
         public Resettlement() 
         {
             Id = NewId;
+            CheckInDate = DateTime.Now;
+            ChectOutDate = CheckInDate.AddYears(1);
         }
 
         [JsonIgnore]
